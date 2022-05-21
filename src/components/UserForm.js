@@ -4,10 +4,11 @@ import { Formik, Field, Form } from "formik";
 import Buttons from "./AddEditUserButtons"
 import add from "../utils/addUser"
 import edit from "../utils/editUser"
+import validator from "validator"
 
 const UserForm = (props) => {
-  let editing = props.users.filter(user => user.id == props.editId )
-  console.log("editing"+ JSON.stringify(editing[0]))
+  let editing = props.users.filter(user => user.id == props.editId)
+  console.log("editing" + JSON.stringify(editing[0]))
   return (
     <div>
       <Formik
@@ -19,12 +20,14 @@ const UserForm = (props) => {
           })
         }
 
-        onSubmit={ (values) => {
-          console.log("hello" + JSON.stringify(values))
-          props.editId ? edit(props.users, props.setUsers, values, props.editId) : add(props.users, props.setUsers, values, props.userId, props.setUserId)
-          // new Promise((r) => setTimeout(r, 500));
-          // alert(JSON.stringify(values, null, 2));
-          props.setShowModal(false);
+        onSubmit={(values) => {
+          if (validator.isEmpty(values.firstName) || validator.isEmpty(values.lastName)|| validator.isEmpty(values.email)) { 
+            alert("please fill all inputs")
+          }
+          else {
+            props.editId ? edit(props.users, props.setUsers, values, props.editId) : add(props.users, props.setUsers, values, props.userId, props.setUserId)
+            props.setShowModal(false);
+          }
         }}
       >
         <Form className="relative p-6 flex-auto">
@@ -38,15 +41,12 @@ const UserForm = (props) => {
                 First Name
               </label>
               <Field
-                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="firstName"
                 name="firstName"
                 type="text"
                 placeholder="Jane"
               />
-              <p class="text-red-500 text-xs italic">
-                Please fill out this field.
-              </p>
             </div>
             <div class="w-full md:w-1/2 px-3">
               <label
@@ -81,9 +81,6 @@ const UserForm = (props) => {
                 placeholder="jane@acme.com"
                 type="email"
               />
-              <p class="text-gray-600 text-xs italic">
-                Make it as long and as crazy as you'd like
-              </p>
             </div>
           </div>
           {/* <div class="flex flex-wrap -mx-3 mb-2">
