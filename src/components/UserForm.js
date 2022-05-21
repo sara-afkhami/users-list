@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Formik, Field, Form } from "formik";
-import Buttons from "./Buttons"
+import Buttons from "./AddEditUserButtons"
 import add from "../utils/addUser"
 import edit from "../utils/editUser"
 
-const ModalForm = (props) => {
+const UserForm = (props) => {
   let editing = props.users.filter(user => user.id == props.editId )
   console.log("editing"+ JSON.stringify(editing[0]))
   return (
@@ -150,4 +150,4 @@ const ModalForm = (props) => {
     </div>
   );
 };
-export default ModalForm;
+export default UserForm;

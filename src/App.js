@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
-import Modal from "./components/Modal";
-import RemoveModal from "./components/RemoveModal";
+import Modal from "./components/AddEditUserModal";
+import RemoveModal from "./components/RemoveUserModal";
 // import addUser from "./utils/addUser";
-import Table from "./components/Table";
+import Table from "./components/UserTable";
 // import "./styles/style.scss"
 
 const App = () => {

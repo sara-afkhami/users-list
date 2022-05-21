@@ -1,5 +1,5 @@
 import React from "react";
-const Buttons = (props) => {
+const AddEditUserButtons = (props) => {
 return(
     <div className="flex items-center justify-end pt-6 border-t border-solid border-slate-200 rounded-b">
             <button
@@ -19,5 +19,5 @@ return(
           </div>
 )
 }
-export default Buttons;
+export default AddEditUserButtons;
 
